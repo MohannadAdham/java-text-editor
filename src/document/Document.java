@@ -5,6 +5,7 @@ package document;
  * @author UC San Diego Intermediate Programming MOOC team
  */
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -67,7 +68,25 @@ public abstract class Document {
 		// TODO: Implement this method so that you can call it from the 
 	    // getNumSyllables method in BasicDocument (module 2) and 
 	    // EfficientDocument (module 3).
-	    return 0;
+		int counter = 0;
+		boolean lastChrVowel = false;
+		char[] vowels = {'a', 'e', 'i', 'o', 'u', 'y', 'A', 'E',
+				'I', 'O', 'U', 'Y'};
+		char[] wordAsArray = word.toCharArray();
+		for (char c: wordAsArray) {
+			if (Arrays.asList(vowels).contains(c)) {
+				if (!lastChrVowel) {
+					counter += 1;
+				} 
+				lastChrVowel = true;				
+			}
+		}
+		// exception for the case of an e at the end of the word
+		if (wordAsArray[wordAsArray.length - 1] == 'e' && counter > 1) {
+			counter -= 1;
+		}
+		
+	    return counter;
 	}
 	
 	/** A method for testing
