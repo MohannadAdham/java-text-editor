@@ -55,7 +55,7 @@ public class BasicDocument extends Document
 	@Override
 	public int getNumSentences()
 	{
-		List<String> sentences = this.getTokens("(^[.?!])+");
+		List<String> sentences = this.getTokens("([^.?!])+");
 		
         return sentences.toArray().length;
 	}

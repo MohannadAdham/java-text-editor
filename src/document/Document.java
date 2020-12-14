@@ -70,22 +70,24 @@ public abstract class Document {
 	    // EfficientDocument (module 3).
 		int counter = 0;
 		boolean lastChrVowel = false;
-		char[] vowels = {'a', 'e', 'i', 'o', 'u', 'y', 'A', 'E',
-				'I', 'O', 'U', 'Y'};
+		String[] vowels = new String[] {"a", "e", "i", "o", "u", "y",
+				 "A", "E", "I", "O", "U", "Y"};
 		char[] wordAsArray = word.toCharArray();
 		for (char c: wordAsArray) {
-			if (Arrays.asList(vowels).contains(c)) {
+			if (Arrays.asList(vowels).contains(Character.toString(c))) {
 				if (!lastChrVowel) {
 					counter += 1;
 				} 
 				lastChrVowel = true;				
+			} else {
+				lastChrVowel = false;
 			}
 		}
 		// exception for the case of an e at the end of the word
-		if (wordAsArray[wordAsArray.length - 1] == 'e' && counter > 1) {
+		if (wordAsArray[wordAsArray.length - 1] == 'e' && counter > 1 &&
+				!Arrays.asList(vowels).contains(Character.toString(wordAsArray[wordAsArray.length - 2]))) {
 			counter -= 1;
 		}
-		
 	    return counter;
 	}
 	
